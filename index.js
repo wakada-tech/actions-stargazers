@@ -19,7 +19,7 @@ async function run() {
     await wait(parseInt(ms));
     core.info((new Date()).toTimeString());
     core.info(JSON.stringify(process.env))
-    const results = await octokit.repos.listStargazersForRepo({
+    const results = await octokit.activity.listStargazersForRepo({
       owner: 'jiangweixian',
       repo: 'templates'
     })
