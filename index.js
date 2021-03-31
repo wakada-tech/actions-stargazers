@@ -1,10 +1,13 @@
 const core = require('@actions/core');
 const wait = require('./wait');
 const github = require('@actions/github')
+const { Octokit } = require('@octokit/rest')
 const fs = require('fs')
 
 const token = core.getInput('repotoken')
-const octokit = github.getOctokit(token);
+const octokit = new Octokit({
+  auth: token
+})
 
 // most @actions toolkit packages have async methods
 async function run() {
