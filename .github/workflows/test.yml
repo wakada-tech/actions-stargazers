@@ -15,6 +15,7 @@ jobs:
     - uses: ./
       with:
         milliseconds: 1000
+        repotoken: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Create Pull Request
       id: cpr

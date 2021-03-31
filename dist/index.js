@@ -10,6 +10,7 @@ const wait = __nccwpck_require__(258);
 const github = __nccwpck_require__(438)
 const fs = __nccwpck_require__(747)
 
+const token = core.getInput('repotoken')
 const octokit = github.getOctokit(token);
 
 // most @actions toolkit packages have async methods
