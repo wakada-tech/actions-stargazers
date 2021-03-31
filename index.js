@@ -1,30 +1,23 @@
 const core = require('@actions/core');
-const wait = require('./wait');
 const github = require('@actions/github')
-const { Octokit } = require('@octokit/rest')
 const fs = require('fs')
 
 const token = core.getInput('repotoken')
-const octokit = new Octokit({
-  auth: token
-})
+const owner = core.getInput('owner')
+const repo = core.getInput('repo')
+const octokit = github.getOctokit(token);
 
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    const ms = core.getInput('milliseconds');
-    core.info(`Waiting ${ms} milliseconds ...`);
-
-    core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-    await wait(parseInt(ms));
-    core.info((new Date()).toTimeString());
     core.info(JSON.stringify(process.env))
     const results = await octokit.activity.listStargazersForRepo({
-      owner: 'jiangweixian',
-      repo: 'templates'
+      owner,
+      repo,
+      per_page: 100
     })
 
-    fs.writeFileSync('./results.json', JSON.stringify(results))
+    fs.writeFileSync('./results.json', JSON.stringify(results.data, undefined, 2))
 
     core.info(fs.readFileSync('./results.json').toString('utf-8'))
 

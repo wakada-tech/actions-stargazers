@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - 'releases/*'
+      - master
 
 jobs:
   # test action works running from the graph
@@ -14,8 +15,9 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ./
       with:
-        milliseconds: 1000
         repotoken: ${{ secrets.GITHUB_TOKEN }}
+        repo: templates
+        owner: jiangweixian
 
     - name: Create Pull Request
       id: cpr

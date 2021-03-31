@@ -1,12 +1,14 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'Stargazers'
+description: 'Sync Stargazers'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
-    required: true
-    default: '1000'
   repotoken:  # id of input
-    description: 'number of milliseconds to wait'
+    description: 'repo token or github token'
+    required: true
+  repo:  # id of input
+    description: 'reponame'
+    required: true
+  owner:  # id of input
+    description: 'username'
     required: true
 outputs:
   time: # output will be available to future steps
