@@ -22,7 +22,7 @@ async function run() {
 
     const data = results.data.map(v => pickby(v, pickbyParams))
 
-    fs.writeJSONSync(target, data, { spaces: 2 })
+    fs.outputJSONSync(target, data, { spaces: 2 })
   } catch (error) {
     core.setFailed(error.message);
   }
