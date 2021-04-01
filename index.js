@@ -20,6 +20,8 @@ async function run() {
       per_page: 100
     })
 
+    core.info(JSON.stringify(pickbyParams))
+
     const data = results.data.map(v => pickby(v, pickbyParams))
 
     fs.outputJSONSync(target, data, { spaces: 2 })
