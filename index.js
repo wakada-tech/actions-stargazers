@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github')
-const fs = require('fs')
+const fs = require('fs-extra')
 const pickby = require('lodash.pickby')
 
 const token = core.getInput('repotoken')
@@ -22,11 +22,7 @@ async function run() {
 
     const data = results.data.map(v => pickby(v, pickbyParams))
 
-    fs.writeFileSync(target, JSON.stringify(data, undefined, 2))
-
-    core.info(fs.readFileSync(target).toString('utf-8'))
-
-    core.setOutput('time', new Date().toTimeString());
+    fs.writeJSONSync(target, data, { spaces: 2 })
   } catch (error) {
     core.setFailed(error.message);
   }
