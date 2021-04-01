@@ -1,10 +1,13 @@
 const core = require('@actions/core');
 const github = require('@actions/github')
 const fs = require('fs')
+const pickby = require('lodash.pickby')
 
 const token = core.getInput('repotoken')
 const owner = core.getInput('owner')
 const repo = core.getInput('repo')
+const pickbyParams = core.getInput('pickby') ? core.getInput('pickby').split(',') : []
+const target = core.getInput('target') || './results.json'
 const octokit = github.getOctokit(token);
 
 // most @actions toolkit packages have async methods
@@ -17,9 +20,11 @@ async function run() {
       per_page: 100
     })
 
-    fs.writeFileSync('./results.json', JSON.stringify(results.data, undefined, 2))
+    const data = results.data.map(v => pickby(v, pickbyParams))
 
-    core.info(fs.readFileSync('./results.json').toString('utf-8'))
+    fs.writeFileSync(target, JSON.stringify(data, undefined, 2))
+
+    core.info(fs.readFileSync(target).toString('utf-8'))
 
     core.setOutput('time', new Date().toTimeString());
   } catch (error) {

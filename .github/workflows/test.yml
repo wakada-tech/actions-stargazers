@@ -18,6 +18,8 @@ jobs:
         repotoken: ${{ secrets.GITHUB_TOKEN }}
         repo: templates
         owner: jiangweixian
+        pickby: login
+        target: ./assets/results.json
 
     - name: Create Pull Request
       id: cpr

@@ -10,6 +10,12 @@ inputs:
   owner:  # id of input
     description: 'username'
     required: true
+  pickby:  # id of input
+    description: 'filter output object'
+    required: false
+  target:  # id of input
+    description: 'saved path'
+    required: false
 outputs:
   time: # output will be available to future steps
     description: 'The message to output'
