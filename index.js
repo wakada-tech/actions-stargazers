@@ -1,12 +1,12 @@
 const core = require('@actions/core');
 const github = require('@actions/github')
 const fs = require('fs-extra')
-const pickby = require('lodash.pickby')
+const pick = require('lodash.pick')
 
 const token = core.getInput('repotoken')
 const owner = core.getInput('owner')
 const repo = core.getInput('repo')
-const pickbyParams = core.getInput('pickby') ? core.getInput('pickby').split(',') : []
+const pickby = core.getInput('pickby') ? core.getInput('pickby').split(',') : []
 const target = core.getInput('target') || './results.json'
 const octokit = github.getOctokit(token);
 
@@ -20,9 +20,9 @@ async function run() {
       per_page: 100
     })
 
-    core.info(JSON.stringify(pickbyParams))
+    core.info(JSON.stringify(pickby))
 
-    const data = results.data.map(v => pickby(v, pickbyParams))
+    const data = results.data.map(v => pick(v, pickby))
 
     fs.outputJSONSync(target, data, { spaces: 2 })
   } catch (error) {
