@@ -26,7 +26,11 @@ You can now consume the action by referencing the v1 branch
 ```yaml
 uses: actions/javascript-action@v1
 with:
-  milliseconds: 1000
+  repotoken: ${{ secrets.GITHUB_TOKEN }}
+  repo: templates
+  owner: jiangweixian
+  pickby: login
+  target: ./assets/results.json
 ```
 
 See the [actions tab](https://github.com/actions/javascript-action/actions) for runs of this action! :rocket:
