@@ -42,11 +42,6 @@ jobs:
         labels: |
           report
           automated pr
-        assignees: peter-evans
-        reviewers: peter-evans
-        team-reviewers: |
-          owners
-          maintainers
         draft: false
 
     - name: Check outputs
