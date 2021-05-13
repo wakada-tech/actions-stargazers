@@ -47,7 +47,6 @@ jobs:
         team-reviewers: |
           owners
           maintainers
-        milestone: 1
         draft: false
 
     - name: Check outputs
